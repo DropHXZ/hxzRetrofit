@@ -20,6 +20,9 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven {
+            url 'file:///Users/bjbl030/Desktop/RetrifitDemo/hxzRetrofit/smartretrofit/'
+        }
     }
 }
 

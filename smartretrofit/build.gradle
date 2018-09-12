@@ -1,40 +1,49 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply from: 'maven_push.gradle'
+apply plugin: 'maven'
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: LOCAL_REPO_URL)
+        pom.groupId = GROUP
+        pom.artifactId = POM_ARTIFACT_ID
+        pom.version = VERSION
+    }
+}
 
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+
+
+
     defaultConfig {
-        applicationId "cn.hxzretrofit"
         minSdkVersion 23
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.5.0'
-
-    implementation 'com.huxz.data:retrofitSample:1.0.0@aar'
 }
