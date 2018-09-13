@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
-apply from: 'maven_push.gradle'
 apply plugin: 'maven'
 uploadArchives {
     repositories.mavenDeployer {
         repository(url: LOCAL_REPO_URL)
         pom.groupId = GROUP
         pom.artifactId = POM_ARTIFACT_ID
+        pom.packaging = 'aar'
         pom.version = VERSION
     }
 }
